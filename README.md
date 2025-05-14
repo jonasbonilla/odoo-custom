@@ -23,4 +23,4 @@ addons_path = /ruta/a/odoo-custom,otra/ruta/de/addons
 2. Crea una rama para tu mejora: git checkout -b feature/nombre-de-la-idea
 3. Realiza tus cambios y añade pruebas si aplica.
 4. Envía un pull request describiendo tu propuesta.
-5. Mantén tu rama actualizada con main.
+5. Mantén tu rama actualizada con 17.0.
