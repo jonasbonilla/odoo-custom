@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates>
+    <t t-name="module_dependency_visualizer.DependencyVisualizer">
+        <div class="o_action_manager">
+            <div class="o_kanban_view o_kanban_dashboard o_view_controller o_action">
+                <div class="o_control_panel d-flex flex-column gap-3 gap-lg-1 px-3 pt-2 pb-3" style="top: 0px;" data-command-category="actions">
+                    <div class="o_control_panel_main d-flex flex-wrap flex-lg-nowrap justify-content-between align-items-lg-start gap-3 flex-grow-1">
+                        <div class="o_control_panel_breadcrumbs d-flex align-items-center gap-1 order-0 h-lg-100">
+                            <div class="o_breadcrumb d-flex gap-1 text-truncate">
+                                <div class="o_last_breadcrumb_item active d-flex fs-4 min-w-0 align-items-center">
+                                    <span class="min-w-0 text-truncate">Visualizar dependencias</span>
+                                </div>
+                            </div>
+                            <span class="d-none d-xl-block me-auto"></span>
+                        </div>
+                        <div class="o_control_panel_actions d-empty-none d-flex align-items-center justify-content-start justify-content-lg-around order-2 order-lg-1 w-100 w-lg-auto">
+                            <div class="o_cp_searchview d-flex input-group">
+                                <div class="o_searchview form-control d-print-contents d-flex align-items-center py-1 border-end-0" aria-autocomplete="list">
+                                    <i class="o_searchview_icon d-print-none oi oi-search me-2" aria-label="Search..." title="Search..."/>
+                                    <div class="o_searchview_input_container d-flex flex-grow-1 flex-wrap gap-1" style="position: relative;">
+                                        <input t-on-keyup="onInputKeyup" type="text" class="o_searchview_input d-print-none flex-grow-1 w-auto border-0" placeholder="Search..."/>
+                                    </div>
+                                </div>
+                                <div class="o-dropdown dropdown o-dropdown--no-caret">
+                                    <button type="button" class="dropdown-toggle o_searchview_dropdown_toggler d-print-none btn btn-outline-secondary o-no-caret rounded-start-0 h-100" tabindex="0" aria-expanded="false">
+                                        <i class="fa fa-caret-down" aria-hidden="true" data-hotkey="shift+q" title="Alternar panel de búsqueda"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="o_control_panel_navigation d-flex flex-wrap flex-md-nowrap justify-content-end gap-3 gap-lg-1 gap-xl-3 order-1 order-lg-2 flex-grow-1">
+                            <div class="o_cp_pager text-nowrap" role="search">
+                                <nav class="o_pager d-flex gap-2 h-100" aria-label="Pager">
+                                    <span class="o_pager_counter align-self-center">
+                                        <span class="o_pager_value d-inline-block border-bottom border-transparent mb-n1">
+                                            <t t-esc="this.count"/>
+                                        </span>
+                                        <span class="o_pager_limit"> Modules</span>
+                                    </span>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="o_content o_component_with_search_panel module_graph_main">
+                    <div class="o_search_panel flex-grow-0 flex-shrink-0 h-100 pb-5 bg-view pe-1 ps-3 module_graph_nav" style="max-height:100% ;">
+                        <section class="o_search_panel_section o_search_panel_category">
+                            <header class="o_search_panel_section_header pt-4 pb-2 text-uppercase cursor-default">
+                                <i class="fa fa-info-circle o_search_panel_section_icon text-odoo me-2"/>
+                                <b>All</b>
+                            </header>
+                            <t t-if="this.nodes">
+                                <ul class="list-group d-block o_search_panel_field module_graph_nav_list">
+                                    <t t-foreach="this.nodes" t-as="node" t-key="node_index">
+                                        <li class="o_search_panel_category_value list-group-item py-1 cursor-pointer border-0 pe-0 ps-0"
+                                            t-att-data-id="node.id" t-att-data-name="node.label" t-on-click="onClickNavModule">
+                                            <header class="list-group-item list-group-item-action d-flex align-items-center px-0 py-lg-0 border-0">
+                                                <div class="o_search_panel_label d-flex align-items-center w-100 cursor-pointer mb-0 o_with_counters">
+                                                    <span class="o_search_panel_label_title text-truncate">
+                                                        <strong><t t-esc="node.shortdesc"/></strong>
+                                                        <br/><code><t t-esc="node.label"/></code>
+                                                    </span>
+                                                </div>
+                                            </header>
+                                        </li>
+                                    </t>
+                                </ul>
+                            </t>
+                        </section>
+                    </div>
+                    <div class="o_kanban_renderer o_renderer d-flex o_kanban_ungrouped">
+                        <div class="module_legend">
+                            <h5>AYUDA:</h5>
+                            <ul>
+                                <li class="module_legend module_legend_uninstallable">uninstallable</li>
+                                <li class="module_legend module_legend_installed">installed</li>
+                                <li class="module_legend module_legend_uninstalled">uninstalled</li>
+                                <li class="module_legend module_legend_to_install">to install</li>
+                                <li class="module_legend module_legend_to_upgrade">to upgrade</li>
+                                <li class="module_legend module_legend_to_remove">to remove</li>
+                                <li><img src="/module_dependency_visualizer/static/src/img/blue_arrow.png"/><span>Dependency</span></li>
+                                <li><img src="/module_dependency_visualizer/static/src/img/red_arrow.png"/><span>Exclusion</span></li>
+                                <li><img class="mouse_img" src="/module_dependency_visualizer/static/src/img/left_click.png"/><span>Info</span></li>
+                                <li><img class="mouse_img" src="/module_dependency_visualizer/static/src/img/right_click.png"/><span>Remove</span></li>
+                            </ul>
+                        </div>
+                        <div t-ref="mynetwork" class="module_graph"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>
