@@ -17,10 +17,11 @@ const state_color = {
 
 class DependencyVisualizer extends Component {
     setup() {
-
+        this.help = true;
         this.orm = useService('orm');
         this.action = useService("action");
         this.container = useRef('mynetwork');
+        this.myhelp = useRef('myhelp');
 
         // Cached state for performance
         this._inputQuery = '';
@@ -31,8 +32,8 @@ class DependencyVisualizer extends Component {
         this.count = 0;
         this.graph_nodes = new vis.DataSet();
         this.graph_edges = new vis.DataSet();
-        this.graph_data = { nodes: this.graph_nodes, edges: this.graph_edges };
         this.graph_options = { edges: { arrows: 'to' } };
+        this.graph_data = { nodes: this.graph_nodes, edges: this.graph_edges };
 
         // Debounce input handler
         this.onInputKeyup = debounce(this.onInputKeyup, 70);
@@ -112,8 +113,11 @@ class DependencyVisualizer extends Component {
         if (!idStr || target.classList.contains('module_selected')) {
             return;
         }
+
+        const myhelp = this.myhelp.el;
         const moduleId    = Number(idStr);
         const moduleLabel = target.getAttribute('data-name');
+        myhelp.classList.add('d-none');
 
         // Limpiar grafo existente
         this.graph_nodes.clear();

@@ -78,13 +78,23 @@
                                 <li class="module_legend module_legend_to_install">to install</li>
                                 <li class="module_legend module_legend_to_upgrade">to upgrade</li>
                                 <li class="module_legend module_legend_to_remove">to remove</li>
-                                <li><img src="/module_dependency_visualizer/static/src/img/blue_arrow.png"/><span>Dependency</span></li>
-                                <li><img src="/module_dependency_visualizer/static/src/img/red_arrow.png"/><span>Exclusion</span></li>
-                                <li><img class="mouse_img" src="/module_dependency_visualizer/static/src/img/left_click.png"/><span>Info</span></li>
-                                <li><img class="mouse_img" src="/module_dependency_visualizer/static/src/img/right_click.png"/><span>Remove</span></li>
+                                <li><img src="/module_dependency_visualizer/static/src/img/blue_arrow.png"/><span>Dependencia</span></li>
+                                <li><img src="/module_dependency_visualizer/static/src/img/red_arrow.png"/><span>Exclusión</span></li>
+                                <li><img class="mouse_img" src="/module_dependency_visualizer/static/src/img/left_click.png"/><span>Información</span></li>
+                                <li><img class="mouse_img" src="/module_dependency_visualizer/static/src/img/right_click.png"/><span>Eliminar</span></li>
                             </ul>
                         </div>
-                        <div t-ref="mynetwork" class="module_graph"></div>
+                        <div t-ref="mynetwork" class="module_graph"/>
+                        <div t-ref="myhelp" class="o_view_nocontent" style="margin-right: 132px !important;">
+                            <div class="o_nocontent_help">
+                                <p class="o_view_nocontent_smiling_face">
+                                    Seleccione un módulo para ver sus dependencias
+                                </p>
+                                <p>
+                                    Gestione las dependencias de sus módulos para garantizar una instalación y funcionamiento correctos.
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
