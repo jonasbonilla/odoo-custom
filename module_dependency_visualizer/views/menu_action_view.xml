@@ -3,19 +3,12 @@
     <record id="dependency_visualizer_action_client" model="ir.actions.client">
         <field name="name">Dependencias entre módulos</field>
         <field name="tag">ac_module_dependency_visualizer</field>
-        <field name="target">main</field>
     </record>
-
+    
     <menuitem
-        name="Dependencias entre módulos"
-        id="dependency_visualizer_menu"
-        parent="base.menu_custom"
-        sequence="20"
-        groups="base.group_no_one"/>
+        id="dependency_visualizer_desk_menu"
+        name="Dependencias"
+        action="module_dependency_visualizer.dependency_visualizer_action_client"
+        web_icon="module_dependency_visualizer,static/description/icon.png"/>
 
-    <menuitem
-        id="dependency_visualizer_root_menu"
-        name="Visualizar dependencias"
-        parent="module_dependency_visualizer.dependency_visualizer_menu"
-        action="module_dependency_visualizer.dependency_visualizer_action_client"/>
 </odoo>
